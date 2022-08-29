@@ -1,0 +1,31 @@
+_schema-version: "2.1"
+ID: MANOJ_DB
+version: 0.0.1
+modules:
+- name: MANOJ_DB
+  type: hdb
+  path: MANOJ_DB
+  requires:
+  - name: hdi_MANOJ_DB
+    properties:
+      TARGET_CONTAINER: ~{hdi-container-name}
+- name: db
+  type: hdb
+  path: ../MANOJ_MTA1/db
+  requires:
+  - name: hdi_db
+resources:
+- name: hdi_MANOJ_DB
+  type: com.sap.xs.hdi-container
+  parameters:
+    config:
+      schema: MANOJ_SCH
+  properties:
+    hdi-container-name: ${service-name}
+- name: hdi_db
+  type: com.sap.xs.hdi-container
+  parameters:
+    config:
+      schema: mta1_sch
+  properties:
+    hdi-container-name: ${service-name}
